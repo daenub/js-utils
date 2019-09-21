@@ -1,18 +1,18 @@
 export function encodeParams(params) {
-  let queryStringParams = []
+  let searchParams = new URLSearchParams()
   for (let p in params) {
     if (params[p]) {
       if (Array.isArray(params[p])) {
         params[p].forEach(pValue => {
-          queryStringParams.push(`${p}=${pValue}`)
+          searchParams.append(p, pValue)
         })
       } else {
-        queryStringParams.push(`${p}=${params[p]}`)
+        searchParams.append(p, params[p])
       }
     }
   }
 
-  return encodeURI("?" + queryStringParams.join("&"))
+  return "?" + searchParams.toString()
 }
 
 export const containsJSON = response => {
